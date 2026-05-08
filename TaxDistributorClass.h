@@ -50,8 +50,8 @@ public:
     // Functions
     constexpr void DistributeTax();
 
-    const constexpr std::shared_ptr<std::vector<IncomeGroup>> IncomeGroups() const;
     constexpr std::shared_ptr<std::vector<long double>> SortedIncomes() const;
+    const std::shared_ptr<std::vector<IncomeGroup>> IncomeGroups() const;
 
     constexpr long double TotalIncome() const;
     constexpr long double TaxPercentage() const;

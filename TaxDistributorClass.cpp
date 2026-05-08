@@ -194,7 +194,7 @@ constexpr std::shared_ptr<std::vector<long double>> TaxDistributor::SortedIncome
     return sortedIncomes;
 }
 
-const constexpr std::shared_ptr<std::vector<IncomeGroup>> TaxDistributor::IncomeGroups() const
+const std::shared_ptr<std::vector<IncomeGroup>> TaxDistributor::IncomeGroups() const
 {
     return incomeGroups;
 }
