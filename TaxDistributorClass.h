@@ -34,7 +34,7 @@ private:
     void SetLastPercentileAndHighestIndividualIncome();
 
     constexpr long double CalculateLowerTaxRange(const IncomeGroup &previousIncomeGroup) const;
-    constexpr long double CalculateUpperTaxRange(IncomeGroup &previousIncomeGroup, IncomeGroup &currentIncomeGroup) const;
+    constexpr long double CalculateUpperTaxRange(const IncomeGroup &previousIncomeGroup, const IncomeGroup &currentIncomeGroup) const;
 
     constexpr long double CalculateTaxForIncomeGroup(const long double lowerTaxRange, const long double upperTaxRange, IncomeGroup &previousIncomeGroup, IncomeGroup &currentIncomeGroup) const;
     constexpr void CalculateTaxesForIncomeGroups();

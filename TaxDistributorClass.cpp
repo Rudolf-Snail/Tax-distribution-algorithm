@@ -86,7 +86,7 @@ constexpr long double TaxDistributor::CalculateLowerTaxRange(const IncomeGroup &
     return previousIncomeGroup.TaxOfIndividual();
 }
 
-constexpr long double TaxDistributor::CalculateUpperTaxRange(IncomeGroup &previousIncomeGroup, IncomeGroup &currentIncomeGroup) const
+constexpr long double TaxDistributor::CalculateUpperTaxRange(const IncomeGroup &previousIncomeGroup, const IncomeGroup &currentIncomeGroup) const
 {
     const long double taxOfIndividualInPreviousIncomeGroup = previousIncomeGroup.TaxOfIndividual();
     const long double incomeOfIndividualInPreviousIncomeGroup = previousIncomeGroup.IncomeOfIndividual();
