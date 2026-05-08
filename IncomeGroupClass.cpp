@@ -104,32 +104,32 @@ IncomeGroup::~IncomeGroup()
 }
 
 // Public functions
-const constexpr long double IncomeGroup::IncomeOfIndividual() const
+constexpr long double IncomeGroup::IncomeOfIndividual() const
 {
     return incomeOfIndividual;
 }
 
-const constexpr long double IncomeGroup::IncomeOfGroup() const
+constexpr long double IncomeGroup::IncomeOfGroup() const
 {
     return incomeOfGroup;
 }
 
-const constexpr long long int IncomeGroup::IndexOfStartOfGroup() const
+constexpr long long int IncomeGroup::IndexOfStartOfGroup() const
 {
     return indexOfStartOfGroup;
 }
 
-const constexpr long long int IncomeGroup::GroupSize() const
+constexpr long long int IncomeGroup::GroupSize() const
 {
     return groupSize;
 }
 
-const constexpr long double IncomeGroup::IncomePercentile() const
+constexpr long double IncomeGroup::IncomePercentile() const
 {
     return incomePercentile;
 }
 
-const long double IncomeGroup::TaxOfIndividual() const
+long double IncomeGroup::TaxOfIndividual() const
 {
     return taxOfIndividual;
 }
@@ -141,7 +141,7 @@ void IncomeGroup::SetTaxOfIndividualAndUpdateGroup(const long double taxOfIndivi
     CalculateAndSetTaxOfGroup();
 }
 
-const long double IncomeGroup::TaxOfGroup() const
+long double IncomeGroup::TaxOfGroup() const
 {
     return taxOfGroup;
 }

@@ -10,7 +10,7 @@ constexpr void TaxDistributor::CheckIncome(const std::vector<long double> &incom
         throw std::invalid_argument{"The vector income cannot be empty."};
 }
 
-const constexpr std::shared_ptr<std::vector<long double>> TaxDistributor::SortIncome(const std::vector<long double> &incomes) const
+constexpr std::shared_ptr<std::vector<long double>> TaxDistributor::SortIncome(const std::vector<long double> &incomes) const
 {
     CheckIncome(incomes);
 
@@ -101,7 +101,7 @@ constexpr long double TaxDistributor::CalculateUpperTaxRange(IncomeGroup &previo
     return std::min({maxTaxForTheCurrentNetIncomeToBeEqualToThePreviousNetIncome, taxPercentageOfCurrentIncome, currentIncome, taxRemaining});
 }
 
-const constexpr long double TaxDistributor::CalculateTaxForIncomeGroup(const long double lowerTaxRange, const long double upperTaxRange, IncomeGroup &previousIncomeGroup, IncomeGroup &currentIncomeGroup) const
+constexpr long double TaxDistributor::CalculateTaxForIncomeGroup(const long double lowerTaxRange, const long double upperTaxRange, IncomeGroup &previousIncomeGroup, IncomeGroup &currentIncomeGroup) const
 {
     const long double ratioOfCurrentPercentileToTheLastPercentile = currentIncomeGroup.IncomePercentile() / lastPercentile;
     const long double reverseRatioOfPreviousPercentileToCurrentPercentile = (currentIncomeGroup.IncomePercentile() == 0) ? 0 : 1 - (previousIncomeGroup.IncomePercentile() / currentIncomeGroup.IncomePercentile());
@@ -113,7 +113,7 @@ const constexpr long double TaxDistributor::CalculateTaxForIncomeGroup(const lon
     return lowerTaxRange + (ratioBasedOnFactors * (upperTaxRange - lowerTaxRange));
 }
 
-const constexpr void TaxDistributor::CalculateTaxesForIncomeGroups()
+constexpr void TaxDistributor::CalculateTaxesForIncomeGroups()
 {
     const auto sizeOfIncomeGroups = incomeGroups->size();
 
@@ -136,7 +136,7 @@ const constexpr void TaxDistributor::CalculateTaxesForIncomeGroups()
     }
 }
 
-const constexpr void TaxDistributor::CalculateMoneyAfterTaxesForIncomeGroups()
+constexpr void TaxDistributor::CalculateMoneyAfterTaxesForIncomeGroups()
 {
     IncomeGroup *currentIncomeGroup;
     long double currentIncomeGroupTaxOfGroup;
@@ -182,14 +182,14 @@ TaxDistributor::~TaxDistributor()
 }
 
 // Public functions
-const constexpr void TaxDistributor::DistributeTax()
+constexpr void TaxDistributor::DistributeTax()
 {
     CalculateTaxesForIncomeGroups();
 
     CalculateMoneyAfterTaxesForIncomeGroups();
 }
 
-const constexpr std::shared_ptr<std::vector<long double>> TaxDistributor::SortedIncomes() const
+constexpr std::shared_ptr<std::vector<long double>> TaxDistributor::SortedIncomes() const
 {
     return sortedIncomes;
 }
@@ -199,32 +199,32 @@ const constexpr std::shared_ptr<std::vector<IncomeGroup>> TaxDistributor::Income
     return incomeGroups;
 }
 
-const constexpr long double TaxDistributor::TotalIncome() const
+ constexpr long double TaxDistributor::TotalIncome() const
 {
     return totalIncome;
 }
 
-const constexpr long double TaxDistributor::TaxPercentage() const
+constexpr long double TaxDistributor::TaxPercentage() const
 {
     return taxPercentage;
 }
 
-const constexpr long double TaxDistributor::TotalTax() const
+ constexpr long double TaxDistributor::TotalTax() const
 {
     return totalTax;
 }
 
-const constexpr long double TaxDistributor::TaxRemaining() const
+constexpr long double TaxDistributor::TaxRemaining() const
 {
     return taxRemaining;
 }
 
-const constexpr long double TaxDistributor::LastPercentile() const
+ constexpr long double TaxDistributor::LastPercentile() const
 {
     return lastPercentile;
 }
 
-const constexpr long double TaxDistributor::HighestIndividualIncome() const
+constexpr long double TaxDistributor::HighestIndividualIncome() const
 {
     return highestIndividualIncome;
 }

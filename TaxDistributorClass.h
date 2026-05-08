@@ -21,7 +21,7 @@ private:
 
     // Functions
     constexpr void CheckIncome(const std::vector<long double> &incomes) const;
-    const constexpr std::shared_ptr<std::vector<long double>> SortIncome(const std::vector<long double> &incomes) const;
+    constexpr std::shared_ptr<std::vector<long double>> SortIncome(const std::vector<long double> &incomes) const;
 
     constexpr long double CheckTaxPercentage(const long double taxPercentage) const;
 
@@ -36,10 +36,10 @@ private:
     constexpr long double CalculateLowerTaxRange(const IncomeGroup &previousIncomeGroup) const;
     constexpr long double CalculateUpperTaxRange(IncomeGroup &previousIncomeGroup, IncomeGroup &currentIncomeGroup) const;
 
-    const constexpr long double CalculateTaxForIncomeGroup(const long double lowerTaxRange, const long double upperTaxRange, IncomeGroup &previousIncomeGroup, IncomeGroup &currentIncomeGroup) const;
-    const constexpr void CalculateTaxesForIncomeGroups();
+    constexpr long double CalculateTaxForIncomeGroup(const long double lowerTaxRange, const long double upperTaxRange, IncomeGroup &previousIncomeGroup, IncomeGroup &currentIncomeGroup) const;
+    constexpr void CalculateTaxesForIncomeGroups();
 
-    const constexpr void CalculateMoneyAfterTaxesForIncomeGroups();
+    constexpr void CalculateMoneyAfterTaxesForIncomeGroups();
 
 public:
     // Constructors
@@ -48,15 +48,15 @@ public:
     ~TaxDistributor();
 
     // Functions
-    const constexpr void DistributeTax();
+    constexpr void DistributeTax();
 
-    const constexpr std::shared_ptr<std::vector<long double>> SortedIncomes() const;
     const constexpr std::shared_ptr<std::vector<IncomeGroup>> IncomeGroups() const;
+    constexpr std::shared_ptr<std::vector<long double>> SortedIncomes() const;
 
-    const constexpr long double TotalIncome() const;
-    const constexpr long double TaxPercentage() const;
-    const constexpr long double TotalTax() const;
-    const constexpr long double TaxRemaining() const;
-    const constexpr long double LastPercentile() const;
-    const constexpr long double HighestIndividualIncome() const;
+    constexpr long double TotalIncome() const;
+    constexpr long double TaxPercentage() const;
+    constexpr long double TotalTax() const;
+    constexpr long double TaxRemaining() const;
+    constexpr long double LastPercentile() const;
+    constexpr long double HighestIndividualIncome() const;
 };

@@ -42,16 +42,16 @@ public:
     ~IncomeGroup();
 
     // Functions
-    const constexpr long double IncomeOfIndividual() const;
-    const constexpr long double IncomeOfGroup() const;
-    const constexpr long long int IndexOfStartOfGroup() const;
-    const constexpr long long int GroupSize() const;
-    const constexpr long double IncomePercentile() const;
+    constexpr long double IncomeOfIndividual() const;
+    constexpr long double IncomeOfGroup() const;
+    constexpr long long int IndexOfStartOfGroup() const;
+    constexpr long long int GroupSize() const;
+    constexpr long double IncomePercentile() const;
 
-    const long double TaxOfIndividual() const;
+    long double TaxOfIndividual() const;
     void SetTaxOfIndividualAndUpdateGroup(const long double taxOfIndividual);
 
-    const long double TaxOfGroup() const;
+    long double TaxOfGroup() const;
     void SetTaxOfGroupAndUpdateIndividual(const long double taxOfGroup);
 
     void CalculateAndSetTaxOfIndividual();
