@@ -20,26 +20,26 @@ private:
     long double highestIndividualIncome;
 
     // Functions
-    constexpr inline void CheckIncome(const std::vector<long double> &incomes) const;
-    const constexpr inline std::shared_ptr<std::vector<long double>> SortIncome(const std::vector<long double> &incomes) const;
+    constexpr void CheckIncome(const std::vector<long double> &incomes) const;
+    const constexpr std::shared_ptr<std::vector<long double>> SortIncome(const std::vector<long double> &incomes) const;
 
-    constexpr inline long double CheckTaxPercentage(const long double taxPercentage) const;
+    constexpr long double CheckTaxPercentage(const long double taxPercentage) const;
 
-    inline void GroupIntoIncomeGroupsAndCalculateTotalIncome();
+    void GroupIntoIncomeGroupsAndCalculateTotalIncome();
 
-    inline void SetUpAllNeededVariables();
+    void SetUpAllNeededVariables();
 
-    inline void CalculateTotalTaxAndSetTaxRemaining();
+    void CalculateTotalTaxAndSetTaxRemaining();
 
-    inline void SetLastPercentileAndHighestIndividualIncome();
+    void SetLastPercentileAndHighestIndividualIncome();
 
-    constexpr inline long double CalculateLowerTaxRange(const IncomeGroup &previousIncomeGroup) const;
-    constexpr inline long double CalculateUpperTaxRange(IncomeGroup &previousIncomeGroup, IncomeGroup &currentIncomeGroup) const;
+    constexpr long double CalculateLowerTaxRange(const IncomeGroup &previousIncomeGroup) const;
+    constexpr long double CalculateUpperTaxRange(IncomeGroup &previousIncomeGroup, IncomeGroup &currentIncomeGroup) const;
 
-    const constexpr inline long double CalculateTaxForIncomeGroup(const long double lowerTaxRange, const long double upperTaxRange, IncomeGroup &previousIncomeGroup, IncomeGroup &currentIncomeGroup) const;
-    const constexpr inline void CalculateTaxesForIncomeGroups();
+    const constexpr long double CalculateTaxForIncomeGroup(const long double lowerTaxRange, const long double upperTaxRange, IncomeGroup &previousIncomeGroup, IncomeGroup &currentIncomeGroup) const;
+    const constexpr void CalculateTaxesForIncomeGroups();
 
-    const constexpr inline void CalculateMoneyAfterTaxesForIncomeGroups();
+    const constexpr void CalculateMoneyAfterTaxesForIncomeGroups();
 
 public:
     // Constructors
@@ -48,15 +48,15 @@ public:
     ~TaxDistributor();
 
     // Functions
-    const constexpr inline void DistributeTax();
+    const constexpr void DistributeTax();
 
-    const constexpr inline std::shared_ptr<std::vector<long double>> SortedIncomes() const;
-    const constexpr inline std::shared_ptr<std::vector<IncomeGroup>> IncomeGroups() const;
+    const constexpr std::shared_ptr<std::vector<long double>> SortedIncomes() const;
+    const constexpr std::shared_ptr<std::vector<IncomeGroup>> IncomeGroups() const;
 
-    const constexpr inline long double TotalIncome() const;
-    const constexpr inline long double TaxPercentage() const;
-    const constexpr inline long double TotalTax() const;
-    const constexpr inline long double TaxRemaining() const;
-    const constexpr inline long double LastPercentile() const;
-    const constexpr inline long double HighestIndividualIncome() const;
+    const constexpr long double TotalIncome() const;
+    const constexpr long double TaxPercentage() const;
+    const constexpr long double TotalTax() const;
+    const constexpr long double TaxRemaining() const;
+    const constexpr long double LastPercentile() const;
+    const constexpr long double HighestIndividualIncome() const;
 };
