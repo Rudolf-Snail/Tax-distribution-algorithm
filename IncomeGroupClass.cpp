@@ -1,3 +1,6 @@
+#ifndef IncomeGroupClass_cpp
+#define IncomeGroupClass_cpp
+
 #include "IncomeGroupClass.h"
 
 #include <stdexcept>
@@ -52,14 +55,6 @@ constexpr long long int IncomeGroup::CheckGroupSize(const long long int groupSiz
     return groupSize;
 }
 
-constexpr long double IncomeGroup::CheckIncomePercentile(const long double incomePercentile)
-{
-    if (incomePercentile < 0 || incomePercentile > 100)
-        throw std::invalid_argument{"IncomePercentile cannot be smaller than 0 or bigger than 100."};
-
-    return incomePercentile;
-}
-
 constexpr long double IncomeGroup::CalculateIncomeOfIndividual(const long double incomeOfGroup, const long long int groupSize)
 {
     return CheckIncomeOfIndividual(incomeOfGroup / groupSize);
@@ -70,15 +65,15 @@ constexpr long double IncomeGroup::CalculateIncomeOfGroup(const long double inco
     return CheckIncomeOfGroup(incomeOfIndividual * groupSize);
 }
 
-constexpr long double IncomeGroup::CalculateIncomePercentile(const long long int indexOfStartOfGroup, const long long int sizeOfSortedIncome)
+constexpr LimitedPercentage IncomeGroup::CalculateIncomePercentile(const long long int indexOfStartOfGroup, const long long int sizeOfSortedIncome)
 {
     if (indexOfStartOfGroup >= sizeOfSortedIncome || indexOfStartOfGroup < 0)
         throw std::out_of_range{"Index is out of the range of sortedIncome."};
 
-    return CheckIncomePercentile(1.0L * indexOfStartOfGroup / (sizeOfSortedIncome - 1) * 100);
+    return LimitedPercentage(1.0L * indexOfStartOfGroup / (sizeOfSortedIncome - 1) * 100);
 }
 
-constexpr long double IncomeGroup::CalculateIncomePercentile(const long long int indexOfStartOfGroup, const std::vector<long double> &sortedIncome)
+constexpr LimitedPercentage IncomeGroup::CalculateIncomePercentile(const long long int indexOfStartOfGroup, const std::vector<long double> &sortedIncome)
 {
     return CalculateIncomePercentile(indexOfStartOfGroup, sortedIncome.size());
 }
@@ -124,7 +119,7 @@ constexpr long long int IncomeGroup::GroupSize() const
     return groupSize;
 }
 
-constexpr long double IncomeGroup::IncomePercentile() const
+constexpr LimitedPercentage IncomeGroup::IncomePercentile() const
 {
     return incomePercentile;
 }
@@ -162,3 +157,5 @@ void IncomeGroup::CalculateAndSetTaxOfGroup()
 {
     SetTaxOfGroup(TaxOfIndividual() * GroupSize());
 }
+
+#endif
