@@ -24,14 +24,6 @@ constexpr std::shared_ptr<std::vector<long double>> TaxDistributor::SortIncome(c
     return incomesCopy;
 }
 
-constexpr long double TaxDistributor::CheckTaxPercentage(const long double taxPercentage) const
-{
-    if (taxPercentage < 0 || taxPercentage > 100)
-        throw std::invalid_argument{"The taxPercentage cannot be smaller than 0 or bigger than 100."};
-
-    return taxPercentage;
-}
-
 void TaxDistributor::GroupIntoIncomeGroupsAndCalculateTotalIncome()
 {
     long double previousIncome = (*sortedIncomes)[0];
@@ -76,7 +68,7 @@ void TaxDistributor::SetUpAllNeededVariables()
 
 void TaxDistributor::CalculateTotalTaxAndSetTaxRemaining()
 {
-    totalTax = totalIncome * taxPercentage / 100;
+    totalTax = totalIncome * taxPercentage() / 100;
     taxRemaining = totalTax;
 }
 
@@ -95,27 +87,30 @@ constexpr long double TaxDistributor::CalculateLowerTaxRange(const IncomeGroup &
 
 constexpr long double TaxDistributor::CalculateUpperTaxRange(const IncomeGroup &previousIncomeGroup, const IncomeGroup &currentIncomeGroup) const
 {
-    const long double taxOfIndividualInPreviousIncomeGroup = previousIncomeGroup.TaxOfIndividual();
-    const long double incomeOfIndividualInPreviousIncomeGroup = previousIncomeGroup.IncomeOfIndividual();
+    const auto taxOfIndividualInPreviousIncomeGroup = previousIncomeGroup.TaxOfIndividual();
+    const auto incomeOfIndividualInPreviousIncomeGroup = previousIncomeGroup.IncomeOfIndividual();
 
-    const long double currentIncome = currentIncomeGroup.IncomeOfIndividual();
+    const auto currentIncome = currentIncomeGroup.IncomeOfIndividual();
 
-    const long double incomeDifference = currentIncome - incomeOfIndividualInPreviousIncomeGroup;
-    const long double maxTaxForTheCurrentNetIncomeToBeEqualToThePreviousNetIncome = taxOfIndividualInPreviousIncomeGroup + incomeDifference;
+    const auto incomeDifference = currentIncome - incomeOfIndividualInPreviousIncomeGroup;
+    const auto maxTaxForTheCurrentNetIncomeToBeEqualToThePreviousNetIncome = taxOfIndividualInPreviousIncomeGroup + incomeDifference;
 
-    const long double taxPercentageOfCurrentIncome = currentIncome * taxPercentage / 100;
+    const long double taxOfCurrentIncome = currentIncome * taxPercentage() / 100;
 
-    return std::min({maxTaxForTheCurrentNetIncomeToBeEqualToThePreviousNetIncome, taxPercentageOfCurrentIncome, currentIncome, taxRemaining});
+    return std::min({maxTaxForTheCurrentNetIncomeToBeEqualToThePreviousNetIncome, taxOfCurrentIncome, currentIncome, taxRemaining});
 }
 
 constexpr long double TaxDistributor::CalculateTaxForIncomeGroup(const long double lowerTaxRange, const long double upperTaxRange, IncomeGroup &previousIncomeGroup, IncomeGroup &currentIncomeGroup) const
 {
-    const long double ratioOfCurrentPercentileToTheLastPercentile = currentIncomeGroup.IncomePercentile() / lastPercentile;
-    const long double reverseRatioOfPreviousPercentileToCurrentPercentile = (currentIncomeGroup.IncomePercentile() == 0) ? 0 : 1 - (previousIncomeGroup.IncomePercentile() / currentIncomeGroup.IncomePercentile());
-    const long double ratioOfCurrentIndividualIncomeToHighestIndividualIncome = (highestIndividualIncome == 0) ? 0 : currentIncomeGroup.IncomeOfIndividual() / highestIndividualIncome;
-    const long double reverseRatioOfPreviousIncomeToCurrentIncome = (previousIncomeGroup.IncomeOfIndividual() == 0 || currentIncomeGroup.IncomeOfIndividual() == 0) ? 0 : 1 - (previousIncomeGroup.IncomeOfIndividual() / currentIncomeGroup.IncomeOfIndividual());
+    const auto currentIncomePercentile = currentIncomeGroup.IncomePercentile()();
+    const auto previousIndividualIncome = previousIncomeGroup.IncomeOfIndividual();
 
-    const long double ratioBasedOnFactors = (ratioOfCurrentPercentileToTheLastPercentile + reverseRatioOfPreviousPercentileToCurrentPercentile + ratioOfCurrentIndividualIncomeToHighestIndividualIncome + reverseRatioOfPreviousIncomeToCurrentIncome) / 4;
+    const auto currentPercentileToTheLastPercentile = LimitedRatio(currentIncomePercentile, lastPercentile());
+    const auto previousPercentileToCurrentPercentile = (currentIncomePercentile == 0) ? 0 : LimitedReverseRatio(previousIncomeGroup.IncomePercentile()(), currentIncomePercentile);
+    const auto currentIndividualIncomeToHighestIndividualIncome = (highestIndividualIncome == 0) ? 0 : LimitedRatio(currentIncomeGroup.IncomeOfIndividual(), highestIndividualIncome);
+    const auto previousIncomeToCurrentIncome = (previousIndividualIncome == 0 || currentIncomeGroup.IncomeOfIndividual() == 0) ? 0 : LimitedReverseRatio(previousIndividualIncome, currentIncomeGroup.IncomeOfIndividual());
+
+    const auto ratioBasedOnFactors = (currentPercentileToTheLastPercentile() + previousPercentileToCurrentPercentile() + currentIndividualIncomeToHighestIndividualIncome() + previousIncomeToCurrentIncome()) / 4;
 
     return lowerTaxRange + (ratioBasedOnFactors * (upperTaxRange - lowerTaxRange));
 }
@@ -149,13 +144,13 @@ constexpr void TaxDistributor::CalculateTaxesForIncomeGroups()
     IncomeGroup *currentIncomeGroup;
     long double currentIncomeGroupTaxOfGroup;
 
-    long double ratioOfCurrentIncomeGroupIncomeOfGroupToTaxPaidByIncomeGroups;
+    LimitedRatio currentIncomeGroupIncomeOfGroupToTaxPaidByIncomeGroups;
 
     long double taxOfCurrentIncomeGroup;
 
     const auto sizeOfIncomeGroups = incomeGroups->size();
 
-    const long double taxPaidByIncomeGroups = totalTax - taxRemaining;
+    const auto taxPaidByIncomeGroups = totalTax - taxRemaining;
 
     taxRemaining = totalTax;
 
@@ -164,9 +159,9 @@ constexpr void TaxDistributor::CalculateTaxesForIncomeGroups()
         currentIncomeGroup = &(*incomeGroups)[index];
         currentIncomeGroupTaxOfGroup = currentIncomeGroup->TaxOfGroup();
 
-        ratioOfCurrentIncomeGroupIncomeOfGroupToTaxPaidByIncomeGroups = currentIncomeGroupTaxOfGroup / taxPaidByIncomeGroups;
+        currentIncomeGroupIncomeOfGroupToTaxPaidByIncomeGroups = currentIncomeGroupTaxOfGroup / taxPaidByIncomeGroups;
 
-        taxOfCurrentIncomeGroup = totalTax * ratioOfCurrentIncomeGroupIncomeOfGroupToTaxPaidByIncomeGroups;
+        taxOfCurrentIncomeGroup = totalTax * currentIncomeGroupIncomeOfGroupToTaxPaidByIncomeGroups();
 
         currentIncomeGroup->SetTaxOfGroupAndUpdateIndividual(taxOfCurrentIncomeGroup);
         taxRemaining -= taxOfCurrentIncomeGroup;
@@ -175,7 +170,7 @@ constexpr void TaxDistributor::CalculateTaxesForIncomeGroups()
 
 // Public
 // Constructors
-TaxDistributor::TaxDistributor(const std::vector<long double> &incomes, const long double taxPercentage) : sortedIncomes{SortIncome(incomes)}, taxPercentage{CheckTaxPercentage(taxPercentage)}
+TaxDistributor::TaxDistributor(const std::vector<long double> &incomes, const LimitedPercentage taxPercentage) : sortedIncomes{SortIncome(incomes)}, taxPercentage{taxPercentage}
 {
     incomeGroups = std::unique_ptr<std::vector<IncomeGroup>>(new std::vector<IncomeGroup>());
 
@@ -207,17 +202,17 @@ const std::shared_ptr<std::vector<IncomeGroup>> TaxDistributor::IncomeGroups() c
     return incomeGroups;
 }
 
- constexpr long double TaxDistributor::TotalIncome() const
+constexpr long double TaxDistributor::TotalIncome() const
 {
     return totalIncome;
 }
 
-constexpr long double TaxDistributor::TaxPercentage() const
+constexpr LimitedPercentage TaxDistributor::TaxPercentage() const
 {
     return taxPercentage;
 }
 
- constexpr long double TaxDistributor::TotalTax() const
+constexpr long double TaxDistributor::TotalTax() const
 {
     return totalTax;
 }
@@ -227,7 +222,7 @@ constexpr long double TaxDistributor::TaxRemaining() const
     return taxRemaining;
 }
 
- constexpr long double TaxDistributor::LastPercentile() const
+constexpr LimitedPercentage TaxDistributor::LastPercentile() const
 {
     return lastPercentile;
 }
@@ -236,4 +231,5 @@ constexpr long double TaxDistributor::HighestIndividualIncome() const
 {
     return highestIndividualIncome;
 }
+
 #endif

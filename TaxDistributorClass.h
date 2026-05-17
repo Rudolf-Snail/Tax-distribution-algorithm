@@ -2,6 +2,7 @@
 #define TaxDistributorClass_h
 
 #include "IncomeGroupClass.cpp"
+#include "LimitedReverseRatioClass.cpp"
 
 #include <memory>
 #include <algorithm>
@@ -15,18 +16,16 @@ private:
 
     long double totalIncome;
 
-    const long double taxPercentage;
+    const LimitedPercentage taxPercentage;
     long double totalTax;
     long double taxRemaining;
 
-    long double lastPercentile;
+    LimitedPercentage lastPercentile;
     long double highestIndividualIncome;
 
     // Functions
     constexpr void CheckIncome(const std::vector<long double> &incomes) const;
     constexpr std::shared_ptr<std::vector<long double>> SortIncome(const std::vector<long double> &incomes) const;
-
-    constexpr long double CheckTaxPercentage(const long double taxPercentage) const;
 
     void GroupIntoIncomeGroupsAndCalculateTotalIncome();
 
@@ -46,7 +45,7 @@ private:
 
 public:
     // Constructors
-    TaxDistributor(const std::vector<long double> &incomes, const long double taxPercentage);
+    TaxDistributor(const std::vector<long double> &incomes, const LimitedPercentage taxPercentage);
     // Destructor
     ~TaxDistributor();
 
@@ -57,10 +56,11 @@ public:
     const std::shared_ptr<std::vector<IncomeGroup>> IncomeGroups() const;
 
     constexpr long double TotalIncome() const;
-    constexpr long double TaxPercentage() const;
+    constexpr LimitedPercentage TaxPercentage() const;
     constexpr long double TotalTax() const;
     constexpr long double TaxRemaining() const;
-    constexpr long double LastPercentile() const;
+    constexpr LimitedPercentage LastPercentile() const;
     constexpr long double HighestIndividualIncome() const;
 };
+
 #endif
