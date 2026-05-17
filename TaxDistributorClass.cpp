@@ -1,3 +1,6 @@
+#ifndef TaxDistributorClass_cpp
+#define TaxDistributorClass_cpp
+
 #include "TaxDistributorClass.h"
 
 #include <stdexcept>
@@ -228,3 +231,4 @@ constexpr long double TaxDistributor::HighestIndividualIncome() const
 {
     return highestIndividualIncome;
 }
+#endif

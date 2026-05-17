@@ -1,3 +1,6 @@
+#ifndef TaxDistributorClass_h
+#define TaxDistributorClass_h
+
 #include "IncomeGroupClass.cpp"
 
 #include <memory>
@@ -60,3 +63,4 @@ public:
     constexpr long double LastPercentile() const;
     constexpr long double HighestIndividualIncome() const;
 };
+#endif

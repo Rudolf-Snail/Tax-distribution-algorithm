@@ -1,3 +1,6 @@
+#ifndef IncomeGroupClass_h
+#define IncomeGroupClass_h
+
 #include <vector>
 
 class IncomeGroup
@@ -57,3 +60,4 @@ public:
     void CalculateAndSetTaxOfIndividual();
     void CalculateAndSetTaxOfGroup();
 };
+#endif
