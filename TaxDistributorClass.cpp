@@ -124,7 +124,8 @@ constexpr void TaxDistributor::CalculateRatioOutOfTotalTaxForIncomeGroups()
 {
     const auto sizeOfIncomeGroups = incomeGroups->size();
 
-    IncomeGroup *previousIncomeGroup = new IncomeGroup(0, 0, 1, sizeOfIncomeGroups);
+    auto firstPreviousIncomeGroup = IncomeGroup(0, 0, 1, sizeOfIncomeGroups);
+    auto *previousIncomeGroup = &firstPreviousIncomeGroup;
     IncomeGroup *currentIncomeGroup;
 
     long double taxOfAnIndividualInCurrentIncomeGroup;
