@@ -31,7 +31,7 @@ int main()
         auto netIncomeOfIndividual = incomeOfIndividual - taxOfIndividual;
         auto netIncomeOfGroup = incomeOfGroup - taxOfGroup;
 
-        auto incomePercentile = currentIncomeGroup->IncomePercentile();
+        auto incomePercentile = currentIncomeGroup->IncomePercentile()();
 
         std::cout << "Income of individual: " << incomeOfIndividual << "; Income of group: " << incomeOfGroup << "; Tax of individual: " << taxOfIndividual << "; Tax of group: " << taxOfGroup << "; Net income of individual: " << netIncomeOfIndividual << "; Net income of group: " << netIncomeOfGroup << "; Income percentile: " << incomePercentile << "\n";
     }
