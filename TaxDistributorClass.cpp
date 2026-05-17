@@ -35,6 +35,10 @@ constexpr long double TaxDistributor::CheckTaxPercentage(const long double taxPe
 void TaxDistributor::GroupIntoIncomeGroupsAndCalculateTotalIncome()
 {
     long double previousIncome = (*sortedIncomes)[0];
+
+    if (previousIncome < 0)
+        throw std::invalid_argument{"Value of any income cannot be negative."};
+
     long long int startIndexOfPreviousIncome = 0;
 
     long double currentIncome;
