@@ -116,7 +116,7 @@ constexpr long double TaxDistributor::CalculateTaxForIncomeGroup(const long doub
     return lowerTaxRange + (ratioBasedOnFactors * (upperTaxRange - lowerTaxRange));
 }
 
-constexpr void TaxDistributor::CalculateTaxesForIncomeGroups()
+constexpr void TaxDistributor::CalculateRatioOutOfTotalTaxForIncomeGroups()
 {
     const auto sizeOfIncomeGroups = incomeGroups->size();
 
@@ -139,7 +139,7 @@ constexpr void TaxDistributor::CalculateTaxesForIncomeGroups()
     }
 }
 
-constexpr void TaxDistributor::CalculateMoneyAfterTaxesForIncomeGroups()
+constexpr void TaxDistributor::CalculateTaxesForIncomeGroups()
 {
     IncomeGroup *currentIncomeGroup;
     long double currentIncomeGroupTaxOfGroup;
@@ -187,9 +187,9 @@ TaxDistributor::~TaxDistributor()
 // Public functions
 constexpr void TaxDistributor::DistributeTax()
 {
-    CalculateTaxesForIncomeGroups();
+    CalculateRatioOutOfTotalTaxForIncomeGroups();
 
-    CalculateMoneyAfterTaxesForIncomeGroups();
+    CalculateTaxesForIncomeGroups();
 }
 
 constexpr std::shared_ptr<std::vector<long double>> TaxDistributor::SortedIncomes() const

@@ -40,9 +40,9 @@ private:
     constexpr long double CalculateUpperTaxRange(const IncomeGroup &previousIncomeGroup, const IncomeGroup &currentIncomeGroup) const;
 
     constexpr long double CalculateTaxForIncomeGroup(const long double lowerTaxRange, const long double upperTaxRange, IncomeGroup &previousIncomeGroup, IncomeGroup &currentIncomeGroup) const;
-    constexpr void CalculateTaxesForIncomeGroups();
+    constexpr void CalculateRatioOutOfTotalTaxForIncomeGroups();
 
-    constexpr void CalculateMoneyAfterTaxesForIncomeGroups();
+    constexpr void CalculateTaxesForIncomeGroups();
 
 public:
     // Constructors
