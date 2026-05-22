@@ -105,7 +105,7 @@ constexpr long double TaxDistributor::CalculateTaxForIncomeGroup(const long doub
     const auto currentIncomePercentile = currentIncomeGroup.IncomePercentile()();
     const auto previousIndividualIncome = previousIncomeGroup.IncomeOfIndividual();
 
-    const auto currentPercentileToTheLastPercentile = LimitedRatio(currentIncomePercentile, lastPercentile());
+    const auto currentPercentileToTheLastPercentile = (lastPercentile() == 0) ? 1 : LimitedRatio(currentIncomePercentile, lastPercentile());
     const auto previousPercentileToCurrentPercentile = (currentIncomePercentile == 0) ? 0 : LimitedReverseRatio(previousIncomeGroup.IncomePercentile()(), currentIncomePercentile);
     const auto currentIndividualIncomeToHighestIndividualIncome = (highestIndividualIncome == 0) ? 0 : LimitedRatio(currentIncomeGroup.IncomeOfIndividual(), highestIndividualIncome);
     const auto previousIncomeToCurrentIncome = (previousIndividualIncome == 0 || currentIncomeGroup.IncomeOfIndividual() == 0) ? 0 : LimitedReverseRatio(previousIndividualIncome, currentIncomeGroup.IncomeOfIndividual());
