@@ -90,14 +90,14 @@ constexpr long double TaxDistributor::CalculateUpperTaxRange(const IncomeGroup &
     const auto taxOfIndividualInPreviousIncomeGroup = previousIncomeGroup.TaxOfIndividual();
     const auto incomeOfIndividualInPreviousIncomeGroup = previousIncomeGroup.IncomeOfIndividual();
 
-    const auto currentIncome = currentIncomeGroup.IncomeOfIndividual();
+    const auto currentIncomeOfIndividual = currentIncomeGroup.IncomeOfIndividual();
 
-    const auto incomeDifference = currentIncome - incomeOfIndividualInPreviousIncomeGroup;
-    const auto maxTaxForTheCurrentNetIncomeToBeEqualToThePreviousNetIncome = taxOfIndividualInPreviousIncomeGroup + incomeDifference;
+    const auto incomeOfIndividualDifference = currentIncomeOfIndividual - incomeOfIndividualInPreviousIncomeGroup;
+    const auto maxTaxForTheCurrentNetIncomeToBeEqualToThePreviousNetIncome = taxOfIndividualInPreviousIncomeGroup + incomeOfIndividualDifference;
 
-    const long double taxOfCurrentIncome = currentIncome * taxPercentage() / 100;
+    const auto taxOfCurrentIncomeOfIndividual = currentIncomeOfIndividual * taxPercentage() / 100;
 
-    return std::min({maxTaxForTheCurrentNetIncomeToBeEqualToThePreviousNetIncome, taxOfCurrentIncome, currentIncome, taxRemaining});
+    return std::min({maxTaxForTheCurrentNetIncomeToBeEqualToThePreviousNetIncome, taxOfCurrentIncomeOfIndividual, currentIncomeOfIndividual, taxRemaining});
 }
 
 constexpr long double TaxDistributor::CalculateTaxForIncomeGroup(const long double lowerTaxRange, const long double upperTaxRange, IncomeGroup &previousIncomeGroup, IncomeGroup &currentIncomeGroup) const
