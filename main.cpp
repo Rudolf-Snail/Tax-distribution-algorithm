@@ -1,7 +1,6 @@
-#include "TaxDistributorClass.cpp"
+#include "Input.cpp"
 
-#include <iostream>
-#include <iomanip>
+#include <format>
 
 int main()
 {
