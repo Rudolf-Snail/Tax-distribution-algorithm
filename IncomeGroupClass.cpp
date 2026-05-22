@@ -70,7 +70,7 @@ constexpr LimitedPercentage IncomeGroup::CalculateIncomePercentile(const long lo
     if (indexOfStartOfGroup >= sizeOfSortedIncome || indexOfStartOfGroup < 0)
         throw std::out_of_range{"Index is out of the range of sortedIncome."};
 
-    return LimitedPercentage(1.0L * indexOfStartOfGroup / (sizeOfSortedIncome - 1) * 100);
+    return (sizeOfSortedIncome == 1) ? LimitedPercentage(1.0L * 100) : LimitedPercentage(1.0L * indexOfStartOfGroup / (sizeOfSortedIncome - 1) * 100);
 }
 
 constexpr LimitedPercentage IncomeGroup::CalculateIncomePercentile(const long long int indexOfStartOfGroup, const std::vector<long double> &sortedIncome)
