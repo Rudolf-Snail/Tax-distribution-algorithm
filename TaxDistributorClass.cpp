@@ -144,7 +144,7 @@ constexpr void TaxDistributor::CalculateTaxesForIncomeGroups()
     IncomeGroup *currentIncomeGroup;
     long double currentIncomeGroupTaxOfGroup;
 
-    LimitedRatio currentIncomeGroupIncomeOfGroupToTaxPaidByIncomeGroups;
+    LimitedRatio currentIncomeGroupTaxOfGroupToTaxPaidByIncomeGroups;
 
     long double taxOfCurrentIncomeGroup;
 
@@ -159,9 +159,9 @@ constexpr void TaxDistributor::CalculateTaxesForIncomeGroups()
         currentIncomeGroup = &(*incomeGroups)[index];
         currentIncomeGroupTaxOfGroup = currentIncomeGroup->TaxOfGroup();
 
-        currentIncomeGroupIncomeOfGroupToTaxPaidByIncomeGroups = currentIncomeGroupTaxOfGroup / taxPaidByIncomeGroups;
+        currentIncomeGroupTaxOfGroupToTaxPaidByIncomeGroups = currentIncomeGroupTaxOfGroup / taxPaidByIncomeGroups;
 
-        taxOfCurrentIncomeGroup = totalTax * currentIncomeGroupIncomeOfGroupToTaxPaidByIncomeGroups();
+        taxOfCurrentIncomeGroup = totalTax * currentIncomeGroupTaxOfGroupToTaxPaidByIncomeGroups();
 
         currentIncomeGroup->SetTaxOfGroupAndUpdateIndividual(taxOfCurrentIncomeGroup);
         taxRemaining -= taxOfCurrentIncomeGroup;
