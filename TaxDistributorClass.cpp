@@ -172,7 +172,7 @@ constexpr void TaxDistributor::CalculateTaxesForIncomeGroups()
 // Constructors
 TaxDistributor::TaxDistributor(const std::vector<long double> &incomes, const LimitedPercentage taxPercentage) : sortedIncomes{SortIncome(incomes)}, taxPercentage{taxPercentage}
 {
-    incomeGroups = std::unique_ptr<std::vector<IncomeGroup>>(new std::vector<IncomeGroup>());
+    incomeGroups = std::make_shared<std::vector<IncomeGroup>>();
 
     totalIncome = 0;
 
