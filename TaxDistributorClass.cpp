@@ -103,12 +103,12 @@ constexpr long double TaxDistributor::CalculateUpperTaxRange(const IncomeGroup &
 constexpr long double TaxDistributor::CalculateTaxForIncomeGroup(const long double lowerTaxRange, const long double upperTaxRange, IncomeGroup &previousIncomeGroup, IncomeGroup &currentIncomeGroup) const
 {
     const auto currentIncomePercentile = currentIncomeGroup.IncomePercentile()();
-    const auto previousIndividualIncome = previousIncomeGroup.IncomeOfIndividual();
+    const auto previousIncomeOfIndividual = previousIncomeGroup.IncomeOfIndividual();
 
     const auto currentPercentileToTheLastPercentile = (lastPercentile() == 0) ? 1 : LimitedRatio(currentIncomePercentile, lastPercentile());
     const auto previousPercentileToCurrentPercentile = (currentIncomePercentile == 0) ? 0 : LimitedReverseRatio(previousIncomeGroup.IncomePercentile()(), currentIncomePercentile);
     const auto currentIndividualIncomeToHighestIndividualIncome = (highestIndividualIncome == 0) ? 0 : LimitedRatio(currentIncomeGroup.IncomeOfIndividual(), highestIndividualIncome);
-    const auto previousIncomeToCurrentIncome = (previousIndividualIncome == 0 || currentIncomeGroup.IncomeOfIndividual() == 0) ? 0 : LimitedReverseRatio(previousIndividualIncome, currentIncomeGroup.IncomeOfIndividual());
+    const auto previousIncomeToCurrentIncome = (currentIncomeGroup.IncomeOfIndividual() == 0) ? 0 : LimitedReverseRatio(previousIncomeOfIndividual, currentIncomeGroup.IncomeOfIndividual());
 
     const auto ratioBasedOnFactors = (currentPercentileToTheLastPercentile() + previousPercentileToCurrentPercentile() + currentIndividualIncomeToHighestIndividualIncome() + previousIncomeToCurrentIncome()) / 4;
 
