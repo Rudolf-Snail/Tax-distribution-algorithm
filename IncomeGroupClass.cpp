@@ -85,9 +85,7 @@ IncomeGroup::IncomeGroup(const long double incomeOfIndividual, const long long i
       indexOfStartOfGroup{CheckIndexOfStartOfGroup(indexOfStartOfGroup)},
       groupSize{CheckGroupSize(groupSize)},
       incomePercentile{CalculateIncomePercentile(indexOfStartOfGroup, sizeOfSortedIncomes)},
-
       incomeOfGroup{CalculateIncomeOfGroup(incomeOfIndividual, groupSize)}
-
 {
     this->taxOfIndividual = 0;
     CalculateAndSetTaxOfGroup();
