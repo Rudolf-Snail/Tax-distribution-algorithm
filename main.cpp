@@ -59,5 +59,7 @@ int main()
         std::cout << "Income of individual: " << incomeOfIndividual << "; Income of group: " << incomeOfGroup << "; Tax of individual: " << taxOfIndividual << "; Tax of group: " << taxOfGroup << "; Net income of individual: " << netIncomeOfIndividual << "; Net income of group: " << netIncomeOfGroup << "; Income percentile: " << incomePercentile << "\n";
     }
 
+    std::cout << "After tax distribution there is " << taxDistributor.TaxRemaining() << " left to pay.\n";
+
     return 0;
 }
