@@ -35,7 +35,7 @@ int main()
     auto taxDistributor = TaxDistributor(*incomes, taxPercentage);
     taxDistributor.DistributeTax();
 
-    auto incomeGroups = taxDistributor.IncomeGroups();
+    const auto incomeGroups = taxDistributor.IncomeGroups();
     const auto sizeOfIncomeGroups = incomeGroups->size();
 
     std::cout << std::fixed; // Increase floating number precision.
