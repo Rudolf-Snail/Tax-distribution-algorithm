@@ -49,8 +49,8 @@ constexpr long long int IncomeGroup::CheckIndexOfStartOfGroup(const long long in
 
 constexpr long long int IncomeGroup::CheckGroupSize(const long long int groupSize)
 {
-    if (groupSize < 0)
-        throw std::invalid_argument{"GroupSize cannot be smaller than 0;"};
+    if (groupSize <= 0)
+        throw std::invalid_argument{"GroupSize cannot be 0 or smaller."};
 
     return groupSize;
 }
