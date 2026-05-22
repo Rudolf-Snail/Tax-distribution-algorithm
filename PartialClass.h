@@ -8,7 +8,7 @@ protected:
     long double value;
 
     // Functions
-    virtual constexpr long double CheckValue(const long double value) const;
+    virtual constexpr long double CheckValue(const long double value) const; // Not static because of a lack of inheritance for static functions.
     virtual constexpr void CheckValues(const long double part, const long double base) const; // Not static because of a lack of inheritance for static functions.
 
     virtual void SetValue(const Partial &partial);
