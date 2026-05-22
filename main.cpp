@@ -4,9 +4,33 @@
 
 int main()
 {
-    auto incomes = std::unique_ptr<std::vector<long double>>(new std::vector<long double> {10'000, 20'000, 20'000, 20'000, 5'000, 50'000, 100'000, 15'000, 25'000, 45'000, 45'000, 45'000, 45'000, 60'000, 61'000, 20'001, 99'999, 10'001, 50'001, 5'001, 45'001});
+    auto incomes = std::make_unique<std::vector<long double>>();
 
-    const long double taxPercentage = 50;
+    const std::string inputInstructions1 = "Enter number with the value of income to add and press Enter to add it to the list of incomes; press Enter with no number or value present to stop adding incomes: ";
+
+    const std::string vectorEmptyMessage1 = "You must enter at least one valid income to continue.\n";
+
+    const long double minimumLongDoubleValue = std::numeric_limits<long double>::lowest();
+    const long double maximumLongDoubleValue = std::numeric_limits<long double>::max();
+    const std::string valueOutOfRangeMessage1 = std::format("That value is out of range for a long double type; the minimum value you can use is: {}; the maximum value you can use is {}.\n", minimumLongDoubleValue, maximumLongDoubleValue);
+
+    const std::string conversionUnsuccessfulMessage1 = "No conversion could be performed.\n";
+
+    const long double minimumValueInclusive1 = 0;
+    const long double maximumValueInclusive1 = std::numeric_limits<long double>::max();
+    const std::string valueOutOfAcceptedRangeMessage1 = std::format("The value must be within the range from {} to {}.\n", minimumValueInclusive1, maximumValueInclusive1);
+
+    CheckAndProcessInput(inputInstructions1, valueOutOfRangeMessage1, conversionUnsuccessfulMessage1, valueOutOfAcceptedRangeMessage1, minimumValueInclusive1, maximumValueInclusive1, "", true, &incomes, vectorEmptyMessage1);
+
+    const std::string inputInstructions2 = "Enter percentage of the sum of all incomes to collect and press Enter to set it as the tax percentage; valid values are 0-100 inclusive: ";
+
+    const long double minimumValueInclusive2 = 0;
+    const long double maximumValueInclusive2 = 100;
+    const std::string valueOutOfAcceptedRangeMessage2 = std::format("The value must be within the range from {} to {}.\n", minimumValueInclusive2, maximumValueInclusive2);
+
+    const std::string emptyInputMessage = "You must enter a value to continue.\n";
+
+    long double taxPercentage = CheckAndProcessInput(inputInstructions2, valueOutOfRangeMessage1, conversionUnsuccessfulMessage1, valueOutOfAcceptedRangeMessage2, minimumValueInclusive2, maximumValueInclusive2, emptyInputMessage);
 
     auto taxDistributor = TaxDistributor(*incomes, taxPercentage);
     taxDistributor.DistributeTax();
