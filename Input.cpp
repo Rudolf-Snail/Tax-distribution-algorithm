@@ -3,7 +3,7 @@
 
 #include "Input.h"
 
-long double CheckAndProcessInput(const std::string &inputInstructions, const std::string &valueOutOfRangeMessage, const std::string &conversionUnsuccesfulMessage, const std::string &valueOutOfAcceptedRangeMessage, const long double minimumValueInclusive, const long double maximumValueInclusive, const std::string &emptyInputMessage, const bool canGetMultipleValues, std::unique_ptr<std::vector<long double>> *vectorOfMultipleValues, const std::string &vectorEmptyMessage)
+inline long double CheckAndProcessInput(const std::string &inputInstructions, const std::string &valueOutOfRangeMessage, const std::string &conversionUnsuccesfulMessage, const std::string &valueOutOfAcceptedRangeMessage, const long double minimumValueInclusive, const long double maximumValueInclusive, const std::string &emptyInputMessage, const bool canGetMultipleValues, std::unique_ptr<std::vector<long double>> *vectorOfMultipleValues, const std::string &vectorEmptyMessage)
 {
     CreateVectorIfEmptyAndMultipleValuesIsTrue(canGetMultipleValues, *vectorOfMultipleValues);
 
@@ -50,7 +50,7 @@ long double CheckAndProcessInput(const std::string &inputInstructions, const std
     }
 }
 
-void CreateVectorIfEmptyAndMultipleValuesIsTrue(const bool canGetMultipleValues, std::unique_ptr<std::vector<long double>> &vectorOfMultipleValues)
+inline void CreateVectorIfEmptyAndMultipleValuesIsTrue(const bool canGetMultipleValues, std::unique_ptr<std::vector<long double>> &vectorOfMultipleValues)
 {
     if (canGetMultipleValues && vectorOfMultipleValues == nullptr)
     {
@@ -58,7 +58,7 @@ void CreateVectorIfEmptyAndMultipleValuesIsTrue(const bool canGetMultipleValues,
     }
 }
 
-NextAction ProcessCorrectValue(const bool canGetMultipleValues, std::unique_ptr<std::vector<long double>> &vectorOfMultipleValues, const long double value)
+inline NextAction ProcessCorrectValue(const bool canGetMultipleValues, std::unique_ptr<std::vector<long double>> &vectorOfMultipleValues, const long double value)
 {
     if (canGetMultipleValues)
     {
