@@ -61,5 +61,8 @@ int main()
 
     std::cout << "After tax distribution there is: " << std::fabs(taxDistributor.TaxRemaining()) << " " << ((taxDistributor.TaxRemaining() < 0) ? "owed to taxpayers" : "left to pay") << ".\n";
 
+    std::cout << "Press the Enter key to end the program.\n";
+    std::cin.get();
+
     return 0;
 }
