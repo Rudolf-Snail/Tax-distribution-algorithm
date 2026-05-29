@@ -45,12 +45,11 @@ Currently this program supports the following features:
 
 ## How to use
 
-- The software has releases for x64 based processors on Linux — specifically Mint 22.3 — and Windows — specifically 11.
-- Download the `Tax.Distribution.algorithm.zip` file from the release wish to use — all the available releases are listed [here](https://github.com/Rudolf-Snail/Tax-distribution-algorithm/releases/)
+- The software has releases for 64 bit operating systems with x64 based processors for Linux Mint — specifically 22.3 — and Windows 11.
+- Download the `TaxDistributionAlgorithm-Linux-x64.zip` or `TaxDistributionAlgorithm-Windows-x64.zip` file, based on the operating system you wish to use the program on,  from the release you wish to use — all the available releases are listed [here](https://github.com/Rudolf-Snail/Tax-distribution-algorithm/releases/)
 - Extract its contents into a folder you want; the program is portable and doesn't support or need installation.
 - If you pass the requirements listed above run either the `TaxDistributionAlgorithm-Linux-x64.exe` file if you're on Linux or the `TaxDistributionAlgorithm-Windows-x64.exe` if you're on Windows
 - Follow instructions in the program.
-
 
 ## How to build it yourself from source code
 
