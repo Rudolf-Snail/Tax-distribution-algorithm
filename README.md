@@ -45,15 +45,30 @@ Currently this program supports the following features:
 
 ## How to use
 
-- The software has releases for 64 bit operating systems with x64 based processors for Linux Mint — specifically 22.3 — and Windows 11.
-- Download the `TaxDistributionAlgorithm-Linux-x64.zip` or `TaxDistributionAlgorithm-Windows-x64.zip` file, based on the operating system you wish to use the program on,  from the release you wish to use — all the available releases are listed [here](https://github.com/Rudolf-Snail/Tax-distribution-algorithm/releases/)
-- Extract its contents into a folder you want; the program is portable and doesn't support or need installation.
-- If you pass the requirements listed above run either the `TaxDistributionAlgorithm-Linux-x64.exe` file if you're on Linux or the `TaxDistributionAlgorithm-Windows-x64.exe` if you're on Windows
+- The software has multiple releases you can use, if your release isn't listed here you can build it for you computer by following the instructions in the [How to build it yourself from source code](#how-to-build-it-yourself-from-source-code) section. The available releases are: 
+	- For 64 bit operating systems with x64 based processors:
+ 		- Linux Mint — specifically 22.3
+ 		- Windows 11.
+- Get the files:
+	- For **Linux**: Download the `TaxDistributionAlgorithm-Linux-x64.zip` file from the release you wish to use — all the available releases are listed [here](https://github.com/Rudolf-Snail/Tax-distribution-algorithm/releases/)
+	- For **Windows**: Download the `TaxDistributionAlgorithm-Windows-x64.zip` file from the release you wish to use — all the available releases are listed [here](https://github.com/Rudolf-Snail/Tax-distribution-algorithm/releases/)
+- Extract the contents of installed zip file into a folder you want; the program is portable and doesn't support or need installation.
+- Check if you have gcc installed:
+	- For **Linux**: Open the terminal and type `gcc --version` and `g++ --version` if it returns a text with which version you have, you have it. For best chances of success use the latest gcc version.
+	- For **Windows**: Open the command prompt and type `gcc --version` and `g++ --version` if it returns a text with which version you have, you have it. For best chances of success use the latest gcc version.
+- If you don't have it, install it by follow the instructions pointed to by these links:
+	- [**For Linux**](https://www.geeksforgeeks.org/installation-guide/how-to-install-gcc-compiler-on-linux/)
+	- [**For Windows**](https://code.visualstudio.com/docs/cpp/config-mingw#_installing-the-mingww64-toolchain) — note: for installing it on Windows only following the section `Installing the MinGW-w64 toolchain` of the webpage pointed to by the link is necessary.
+- If you pass the requirements listed above you can run the program: 
+	- For **Linux**: Run the `TaxDistributionAlgorithm-Linux-x64.exe` file
+	- For **Windows**: Run the `TaxDistributionAlgorithm-Windows-x64.exe` file
 - Follow instructions in the program.
 
 ## How to build it yourself from source code
 
-1. Install gcc, ideally the latest version, if you don't have it. Here is a [link](https://code.visualstudio.com/docs/cpp/config-mingw#_installing-the-mingww64-toolchain) for installing it on Windows.
+1. Install gcc — ideally the latest version — if you don't have it.
+	- For **Linux**: follow the instructions on [this webpage](https://www.geeksforgeeks.org/installation-guide/how-to-install-gcc-compiler-on-linux/)
+	- For **Windows**: follow the instructions on [this webpage](https://code.visualstudio.com/docs/cpp/config-mingw#_installing-the-mingww64-toolchain)
 2. Navigate to `Tax distribution algorithm` in your command line.
 3. Run the command `g++ -std=c++23 ./main.cpp -o nameOfTheExecutableFile.exe`. More information on the command is available [here](https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/C_002b_002b-Dialect-Options.html).
 4. Your compiled program is now in the `Tax distribution algorithm` folder under the name `nameOfTheExecutableFile.exe` or the name you chose.
